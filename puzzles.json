@@ -1,0 +1,113 @@
+{
+  "puzzles": [
+    {
+      "id": 1,
+      "date": "2024-01-01",
+      "schlag": "König",
+      "farbe": "Herz",
+      "trick": [
+        { "suit": "Eichel", "rank": "Ober" },
+        { "suit": "Herz", "rank": "Unter" },
+        { "suit": "Laub", "rank": "10" },
+        null
+      ],
+      "hand": [
+        { "suit": "Herz", "rank": "König" },
+        { "suit": "Schellen", "rank": "König" },
+        { "suit": "Eichel", "rank": "7" }
+      ],
+      "question": "Welche Karte solltest du spielen?",
+      "type": "card",
+      "correctAnswer": { "suit": "Herz", "rank": "König" },
+      "explanation": "Die Herz König ist die Rechte (höchste Karte) und gewinnt diesen Stich sicher."
+    },
+    {
+      "id": 2,
+      "date": "2024-01-02",
+      "schlag": "Ober",
+      "farbe": "Schellen",
+      "trick": [
+        { "suit": "Herz", "rank": "König" },
+        { "suit": "Schellen", "rank": "Ass" },
+        { "suit": "Laub", "rank": "Ober" },
+        { "suit": "Eichel", "rank": "Ober" }
+      ],
+      "hand": [],
+      "question": "Wer gewinnt diesen Stich?",
+      "type": "multiple_choice",
+      "options": [
+        "Vorhand (Herz König)",
+        "Mittelhand (Schellen Ass)",
+        "Hinterhand (Laub Ober)",
+        "Geber (Eichel Ober)"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Die Schellen Ass ist die Guade (eine über der Rechte) und ist die höchste Karte im Spiel."
+    },
+    {
+      "id": 3,
+      "date": "2024-01-03",
+      "schlag": "Unter",
+      "farbe": "Eichel",
+      "trick": [
+        { "suit": "Laub", "rank": "König" },
+        { "suit": "Eichel", "rank": "8" },
+        null,
+        null
+      ],
+      "hand": [
+        { "suit": "Eichel", "rank": "Unter" },
+        { "suit": "Herz", "rank": "7" },
+        { "suit": "Schellen", "rank": "10" }
+      ],
+      "question": "Welche Karte solltest du spielen?",
+      "type": "card",
+      "correctAnswer": { "suit": "Eichel", "rank": "Unter" },
+      "explanation": "Die Eichel Unter ist die Rechte und gewinnt den Stich. Die anderen Karten haben keine Chance gegen die bereits gespielte Eichel 8 (Trumpffarbe)."
+    },
+    {
+      "id": 4,
+      "date": "2024-01-04",
+      "schlag": "7",
+      "farbe": "Laub",
+      "trick": [
+        { "suit": "Herz", "rank": "Ass" },
+        { "suit": "Laub", "rank": "König" },
+        { "suit": "Schellen", "rank": "7" },
+        null
+      ],
+      "hand": [
+        { "suit": "Laub", "rank": "7" },
+        { "suit": "Herz", "rank": "10" },
+        { "suit": "Eichel", "rank": "König" }
+      ],
+      "question": "Welche Karte solltest du spielen?",
+      "type": "card",
+      "correctAnswer": { "suit": "Laub", "rank": "7" },
+      "explanation": "Die Laub 7 ist die Rechte und schlägt die Schellen 7 (die nur ein Schlag ist, aber nicht die Rechte)."
+    },
+    {
+      "id": 5,
+      "date": "2024-01-05",
+      "schlag": "Ass",
+      "farbe": "Herz",
+      "trick": [
+        { "suit": "Eichel", "rank": "Ober" },
+        { "suit": "Laub", "rank": "Ass" },
+        { "suit": "Schellen", "rank": "Ass" },
+        { "suit": "Eichel", "rank": "Ass" }
+      ],
+      "hand": [],
+      "question": "Was weißt du über die Herz Ass?",
+      "type": "multiple_choice",
+      "options": [
+        "Die Herz Ass (Rechte) ist noch im Spiel bei einem anderen Spieler",
+        "Die Herz Ass wurde bereits in einem früheren Stich gespielt",
+        "Die Herz Ass ist definitiv beim Geber",
+        "Keine Information - könnte überall sein"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Da alle vier Asse außer der Herz Ass gespielt wurden, und die Rechte nicht im Stich ist, muss sie noch bei einem der Spieler sein. Sie wurde nicht gespielt, obwohl drei andere Schläge gespielt wurden."
+    }
+  ]
+}
