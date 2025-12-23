@@ -11,6 +11,7 @@
         { "suit": "Laub", "rank": "10" },
         null
       ],
+      "trickStarter": 0,
       "hand": [
         { "suit": "Herz", "rank": "König" },
         { "suit": "Schellen", "rank": "König" },
@@ -32,14 +33,14 @@
         { "suit": "Laub", "rank": "Ober" },
         { "suit": "Eichel", "rank": "Ober" }
       ],
-      "hand": [],
+      "trickStarter": 1,
       "question": "Wer gewinnt diesen Stich?",
       "type": "multiple_choice",
       "options": [
-        "Vorhand (Herz König)",
-        "Mittelhand (Schellen Ass)",
-        "Hinterhand (Laub Ober)",
-        "Geber (Eichel Ober)"
+        "Position 1 (unten)",
+        "Position 2 (links) - Die Schellen Ass",
+        "Position 3 (oben)",
+        "Position 4 (rechts)"
       ],
       "correctAnswer": 1,
       "explanation": "Die Schellen Ass ist die Guade (eine über der Rechte) und ist die höchste Karte im Spiel."
@@ -55,6 +56,7 @@
         null,
         null
       ],
+      "trickStarter": 1,
       "hand": [
         { "suit": "Eichel", "rank": "Unter" },
         { "suit": "Herz", "rank": "7" },
@@ -76,6 +78,7 @@
         { "suit": "Schellen", "rank": "7" },
         null
       ],
+      "trickStarter": 2,
       "hand": [
         { "suit": "Laub", "rank": "7" },
         { "suit": "Herz", "rank": "10" },
@@ -91,13 +94,20 @@
       "date": "2024-01-05",
       "schlag": "Ass",
       "farbe": "Herz",
+      "previousTrick": [
+        { "suit": "Herz", "rank": "König" },
+        { "suit": "Schellen", "rank": "König" },
+        { "suit": "Eichel", "rank": "König" },
+        { "suit": "Laub", "rank": "König" }
+      ],
+      "previousTrickStarter": 0,
       "trick": [
         { "suit": "Eichel", "rank": "Ober" },
         { "suit": "Laub", "rank": "Ass" },
         { "suit": "Schellen", "rank": "Ass" },
         { "suit": "Eichel", "rank": "Ass" }
       ],
-      "hand": [],
+      "trickStarter": 3,
       "question": "Was weißt du über die Herz Ass?",
       "type": "multiple_choice",
       "options": [
@@ -108,6 +118,35 @@
       ],
       "correctAnswer": 0,
       "explanation": "Da alle vier Asse außer der Herz Ass gespielt wurden, und die Rechte nicht im Stich ist, muss sie noch bei einem der Spieler sein. Sie wurde nicht gespielt, obwohl drei andere Schläge gespielt wurden."
+    },
+    {
+      "id": 6,
+      "date": "2024-01-06",
+      "schlag": "König",
+      "farbe": "Eichel",
+      "previousTrick": [
+        { "suit": "Herz", "rank": "7" },
+        { "suit": "Laub", "rank": "König" },
+        { "suit": "Eichel", "rank": "Ober" },
+        { "suit": "Schellen", "rank": "König" }
+      ],
+      "previousTrickStarter": 2,
+      "trick": [
+        { "suit": "Eichel", "rank": "König" },
+        null,
+        null,
+        null
+      ],
+      "trickStarter": 0,
+      "hand": [
+        { "suit": "Herz", "rank": "Ass" },
+        { "suit": "Eichel", "rank": "8" },
+        { "suit": "Laub", "rank": "10" }
+      ],
+      "question": "Der Gegner hat die Rechte gespielt. Welche Karte solltest du spielen?",
+      "type": "card",
+      "correctAnswer": { "suit": "Eichel", "rank": "8" },
+      "explanation": "Da die Rechte bereits gespielt wurde und du den Stich nicht gewinnen kannst, solltest du eine niedrige Trumpfkarte spielen (Eichel 8) um deine höheren Karten zu behalten."
     }
   ]
 }
