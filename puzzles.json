@@ -5,28 +5,20 @@
     "date": "2024-01-10",
     "schlag": "Ass",
     "farbe": "Herz",
-    "previousTrick": [
-        { "suit": "Herz", "rank": "König" },
-        { "suit": "Schellen", "rank": "König" },
-        { "suit": "Eichel", "rank": "König" },
-        { "suit": "Laub", "rank": "König" }
-    ],
-    "previousTrickStarter": 0,
-    "trick": [
-        { "suit": "Eichel", "rank": "Ober" },
-        { "suit": "Laub", "rank": "Ass" },
-        { "suit": "Schellen", "rank": "Ass" },
-        { "suit": "Eichel", "rank": "Ass" }
-    ],
-    "trickStarter": 3,
     "question": "Was weißt du?",
     "type": "knowledge",
-
-    "correctPossible": [
-        { "suit": "Herz", "rank": "Ass" }
+    "trick": [
+      { "suit": "Eichel", "rank": "Ober" },
+      { "suit": "Herz", "rank": "Unter" },
+      { "suit": "Laub", "rank": "10" },
+      null
     ],
+    "correctPossible": {
+        "suits": ["Herz"],
+        "ranks": ["Ass"]
+    },
 
-    "explanation": "Alle anderen Asse wurden bereits gespielt. Da die Herz Ass nicht im Stich ist, muss sie sich noch bei einem Spieler befinden."
+    "explanation": "Die Rechte ist die Herz Ass und wurde noch nicht gespielt."
     },
     {
       "id": 6,
