@@ -1,7 +1,35 @@
 {
   "puzzles": [
     {
-      "id": 1,
+    "id": 7,
+    "date": "2024-01-10",
+    "schlag": "Ass",
+    "farbe": "Herz",
+    "previousTrick": [
+        { "suit": "Herz", "rank": "König" },
+        { "suit": "Schellen", "rank": "König" },
+        { "suit": "Eichel", "rank": "König" },
+        { "suit": "Laub", "rank": "König" }
+    ],
+    "previousTrickStarter": 0,
+    "trick": [
+        { "suit": "Eichel", "rank": "Ober" },
+        { "suit": "Laub", "rank": "Ass" },
+        { "suit": "Schellen", "rank": "Ass" },
+        { "suit": "Eichel", "rank": "Ass" }
+    ],
+    "trickStarter": 3,
+    "question": "Was weißt du?",
+    "type": "knowledge",
+
+    "correctPossible": [
+        { "suit": "Herz", "rank": "Ass" }
+    ],
+
+    "explanation": "Alle anderen Asse wurden bereits gespielt. Da die Herz Ass nicht im Stich ist, muss sie sich noch bei einem Spieler befinden."
+    },
+    {
+      "id": 6,
       "date": "2024-01-01",
       "schlag": "König",
       "farbe": "Herz",
@@ -23,7 +51,7 @@
       "explanation": "Die Herz König ist die Rechte (höchste Karte) und gewinnt diesen Stich sicher."
     },
     {
-      "id": 2,
+      "id": 5,
       "date": "2024-01-02",
       "schlag": "Ober",
       "farbe": "Schellen",
@@ -46,7 +74,7 @@
       "explanation": "Die Schellen Ass ist die Guade (eine über der Rechte) und ist die höchste Karte im Spiel."
     },
     {
-      "id": 3,
+      "id": 4,
       "date": "2024-01-03",
       "schlag": "Unter",
       "farbe": "Eichel",
@@ -68,7 +96,7 @@
       "explanation": "Die Eichel Unter ist die Rechte und gewinnt den Stich. Die anderen Karten haben keine Chance gegen die bereits gespielte Eichel 8 (Trumpffarbe)."
     },
     {
-      "id": 4,
+      "id": 3,
       "date": "2024-01-04",
       "schlag": "7",
       "farbe": "Laub",
@@ -90,7 +118,7 @@
       "explanation": "Die Laub 7 ist die Rechte und schlägt die Schellen 7 (die nur ein Schlag ist, aber nicht die Rechte)."
     },
     {
-      "id": 5,
+      "id": 2,
       "date": "2024-01-05",
       "schlag": "Ass",
       "farbe": "Herz",
@@ -120,7 +148,7 @@
       "explanation": "Da alle vier Asse außer der Herz Ass gespielt wurden, und die Rechte nicht im Stich ist, muss sie noch bei einem der Spieler sein. Sie wurde nicht gespielt, obwohl drei andere Schläge gespielt wurden."
     },
     {
-      "id": 6,
+      "id": 1,
       "date": "2024-01-06",
       "schlag": "König",
       "farbe": "Eichel",

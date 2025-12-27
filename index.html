@@ -105,6 +105,8 @@
             position: sticky;
             top: 2rem;
             box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
+            grid-column: 1;
+            grid-row: 2;
         }
 
         .sidebar h2 {
@@ -192,6 +194,8 @@
             padding: 2rem;
             backdrop-filter: blur(10px);
             box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.3);
+            grid-column: 2;
+            grid-row: 2;
         }
 
         .navigation-buttons {
@@ -224,35 +228,6 @@
         .nav-button:disabled {
             opacity: 0.3;
             cursor: not-allowed;
-        }
-
-        .announcement-section {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(139, 111, 71, 0.4);
-            border-radius: 12px;
-            border: 2px solid var(--gold);
-        }
-
-        .announcement-item {
-            text-align: center;
-        }
-
-        .announcement-label {
-            font-size: 0.9rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .announcement-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--cream);
         }
 
         .section-title {
@@ -382,6 +357,7 @@
         }
 
         .previous-trick-area .game-card {
+            height: 130px;
             width: 70px;
         }
 
@@ -566,9 +542,18 @@
             .container {
                 grid-template-columns: 1fr;
             }
-
+            header {
+                grid-column: 1;  /* Reset to single column */
+                grid-row: 1;
+            }
             .sidebar {
                 position: static;
+                grid-column: 1;
+                grid-row: 3;
+            }
+            .puzzle-container {
+                grid-column: 1;
+                grid-row: 2;
             }
         }
 
@@ -577,22 +562,31 @@
                 font-size: 2rem;
             }
 
-            .announcement-section {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
             .trick-area,
             .previous-trick-area {
                 max-width: 300px;
             }
 
             .game-card {
-                width: 80px;
+                width: 70px;
+                height: 130px;
+
             }
 
             .previous-trick-area .game-card {
-                width: 55px;
+                width: 70px;
+                height: 130px;
+            }
+            header {
+                grid-row: 1;
+            }
+            .sidebar {
+                grid-column: 1;
+                grid-row: 3;
+            }
+            .puzzle-container {
+                grid-column: 1;
+                grid-row: 2;
             }
         }
     </style>
@@ -604,30 +598,14 @@
             <p class="puzzle-date">Rätsel <span id="puzzleNumber">-</span> · <span id="puzzleDate">-</span></p>
         </header>
 
-        <aside class="sidebar">
-            <h2>Rätsel Archiv</h2>
-            <div class="puzzle-list" id="puzzleList"></div>
-        </aside>
-
         <main class="puzzle-container">
             <div class="navigation-buttons">
                 <button class="nav-button" id="prevButton" onclick="navigatePuzzle(-1)">← Vorheriges</button>
                 <button class="nav-button" id="nextButton" onclick="navigatePuzzle(1)">Nächstes →</button>
             </div>
 
-            <div class="announcement-section">
-                <div class="announcement-item">
-                    <div class="announcement-label">Schlag</div>
-                    <div class="announcement-value" id="displaySchlag">-</div>
-                </div>
-                <div class="announcement-item">
-                    <div class="announcement-label">Farbe</div>
-                    <div class="announcement-value" id="displayFarbe">-</div>
-                </div>
-            </div>
-
             <div id="previousTrickSection" class="previous-trick-section hidden">
-                <div class="section-title">Vorheriger Stich</div>
+                <div class="section-title">Erster Stich</div>
                 <div class="previous-trick-area" id="previousTrickArea"></div>
             </div>
 
@@ -647,6 +625,12 @@
 
             <div class="feedback" id="feedback"></div>
         </main>
+
+        <aside class="sidebar">
+            <h2>Rätsel Archiv</h2>
+            <div class="puzzle-list" id="puzzleList"></div>
+        </aside>
+
     </div>
 
     <script>
@@ -697,7 +681,7 @@
             try {
                 const response = await fetch('puzzles.json');
                 const data = await response.json();
-                allPuzzles = data.puzzles;
+                allPuzzles = data.puzzles.reverse();
                 loadProgress();
                 renderPuzzleList();
                 loadPuzzle(0);
@@ -745,10 +729,6 @@
             // Update puzzle info
             document.getElementById('puzzleNumber').textContent = puzzle.id;
             document.getElementById('puzzleDate').textContent = formatDate(puzzle.date);
-
-            // Update announcements
-            document.getElementById('displaySchlag').textContent = puzzle.schlag;
-            document.getElementById('displayFarbe').textContent = getSuitSymbol(puzzle.farbe) + ' ' + puzzle.farbe;
 
             // Render previous trick if exists
             if (puzzle.previousTrick) {
