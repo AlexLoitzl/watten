@@ -4,13 +4,13 @@ let selectedCard = null;
 let selectedOption = null;
 let completedPuzzles = new Set();
 
-let knowledgeMode = null; // "possible" | "impossible"
 let selectedSuits = new Set();
 let selectedRanks = new Set();
 
 const KNOWLEDGE_SUITS = ["Herz", "Schellen", "Eichel", "Laub"];
 const KNOWLEDGE_RANKS = ["Ass", "König", "Ober", "Unter", "10", "9", "8", "7"];
-
+const suitModeRef = { current: null };
+const rankModeRef = { current: null };
 
 // Card image path generator
 function getCardImagePath(suit, rank) {
@@ -234,7 +234,8 @@ function renderAnswerInterface(puzzle) {
     document.getElementById("knowledgeArea").classList.add("hidden");
     document.getElementById("knowledgeLegend").classList.add("hidden");
 
-    knowledgeMode = null;
+    knowledgeModeSuits = null;
+    knowledgeModeRanks = null;
     selectedSuits.clear();
     selectedRanks.clear();
 
@@ -286,15 +287,24 @@ function selectOption(index, buttonEl) {
     selectedOption = index;
 }
 
-function setsEqual(set, arr) {
-    if (set.size !== arr.length) return false;
-    return [...set].every(v => arr.includes(v));
+function setsEqual(a, b) {
+    if (a === null || b === null) return false;
+    if (a.size !== b.size) return false;
+    for (const v of a) if (!b.has(v)) return false;
+    return true;
 }
 
 function checkAnswer() {
     const puzzle = allPuzzles[currentPuzzleIndex];
     const feedback = document.getElementById('feedback');
     let isCorrect = false;
+    const knowledgeArea = document.getElementById("knowledgeArea");
+    // Reset highlight
+    if (knowledgeArea) {
+        knowledgeArea.classList.remove("correct", "incorrect");
+    }
+
+    console.log("check Answer");
 
     if (puzzle.type === 'card') {
         if (selectedCard === null) {
@@ -314,23 +324,38 @@ function checkAnswer() {
 
         isCorrect = selectedOption === puzzle.correctAnswer;
     } else if (puzzle.type === "knowledge") {
-        if (selectedSuits.size === 0 && selectedRanks.size === 0) {
-            alert("Bitte triff mindestens eine Auswahl.");
-            return;
-        }
+        console.log("Knowledge check");
+        console.log("Suit mode:", suitModeRef.current);
+        console.log("Rank mode:", rankModeRef.current);
+        console.log("Selected suits:", [...selectedSuits]);
+        console.log("Selected ranks:", [...selectedRanks]);
+        console.log("Puzzle correct:", puzzle.correct);
 
-        const correct = puzzle.correctPossible || puzzle.correctImpossible;
-        const requiredMode = puzzle.correctPossible ? "possible" : "impossible";
 
-        if (knowledgeMode !== requiredMode) {
-            isCorrect = false;
-        } else {
-            isCorrect =
-                setsEqual(selectedSuits, correct.suits || []) &&
-                setsEqual(selectedRanks, correct.ranks || []);
-        }
+        const suitResult = resolveSelection(
+            selectedSuits,
+            suitModeRef.current,
+            KNOWLEDGE_SUITS
+        );
+
+        const rankResult = resolveSelection(
+            selectedRanks,
+            rankModeRef.current,
+            KNOWLEDGE_RANKS
+        );
+
+        const correctSuits = new Set(puzzle.correct.suits);
+        const correctRanks = new Set(puzzle.correct.ranks);
+
+        isCorrect =
+            setsEqual(suitResult, correctSuits) &&
+            setsEqual(rankResult, correctRanks);
+        console.log("isCorrect:", isCorrect)
+        console.log("suitResult:", suitResult);
+        console.log("rankResult:", rankResult);
+        console.log("correctSuits:", correctSuits);
+        console.log("correctRanks:", correctRanks);
     }
-
 
     if (isCorrect) {
         feedback.className = 'feedback correct';
@@ -350,9 +375,26 @@ function checkAnswer() {
             <div class="explanation">${puzzle.explanation}</div>
         `;
     }
+    flashSubmitButton(isCorrect);
 
     // Disable submit button after answer
-    document.getElementById('submitButton').disabled = true;
+    //document.getElementById('submitButton').disabled = true;
+}
+
+function flashSubmitButton(isCorrect) {
+    const btn = document.getElementById("submitButton");
+    if (!btn) return;
+
+    btn.classList.remove("flash-correct", "flash-wrong");
+
+    // Force reflow so repeated flashes work
+    void btn.offsetWidth;
+
+    btn.classList.add(isCorrect ? "flash-correct" : "flash-wrong");
+
+    setTimeout(() => {
+        btn.classList.remove("flash-correct", "flash-wrong");
+    }, 500);
 }
 
 function getSuitSymbol(suit) {
@@ -376,11 +418,11 @@ function getRankDisplay(rank) {
 }
 
 function renderKnowledgeSelectors() {
-    renderKnowledgeGroup("suitGrid", KNOWLEDGE_SUITS, selectedSuits);
-    renderKnowledgeGroup("rankGrid", KNOWLEDGE_RANKS, selectedRanks);
+    renderKnowledgeGroup("suitGrid", KNOWLEDGE_SUITS, selectedSuits, suitModeRef);
+    renderKnowledgeGroup("rankGrid", KNOWLEDGE_RANKS, selectedRanks, rankModeRef);
 }
 
-function renderKnowledgeGroup(containerId, values, store) {
+function renderKnowledgeGroup(containerId, values, store, modeRef) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
 
@@ -389,21 +431,27 @@ function renderKnowledgeGroup(containerId, values, store) {
         el.className = "knowledge-item";
         el.textContent = value;
 
-        el.onclick = () => toggleKnowledge(el, value, store, "possible");
+        el.onclick = () =>
+            toggleKnowledge(el, value, store, "possible", modeRef);
+
         el.oncontextmenu = e => {
             e.preventDefault();
-            toggleKnowledge(el, value, store, "impossible");
+            toggleKnowledge(el, value, store, "impossible", modeRef);
         };
 
         container.appendChild(el);
     });
 }
 
-function toggleKnowledge(el, value, store, mode) {
-    if (!knowledgeMode) knowledgeMode = mode;
+function toggleKnowledge(el, value, store, mode, modeRef) {
+    // modeRef = { current: suitMode } or { current: rankMode }
 
-    if (knowledgeMode !== mode) {
-        alert("Du kannst nicht gleichzeitig möglich UND unmöglich markieren.");
+    if (!modeRef.current) {
+        modeRef.current = mode;
+    }
+
+    if (modeRef.current !== mode) {
+        alert("Du kannst hier nicht mögliche UND unmögliche Werte mischen.");
         return;
     }
 
@@ -415,10 +463,22 @@ function toggleKnowledge(el, value, store, mode) {
         el.classList.add(mode);
     }
 
-    if (selectedSuits.size === 0 && selectedRanks.size === 0) {
-        knowledgeMode = null;
+    if (store.size === 0) {
+        modeRef.current = null;
     }
 }
+
+function resolveSelection(store, mode, universe) {
+    console.log("ResolveSelection, Mode:", mode);
+    if (!mode) return null; // no information given
+
+    if (mode === "possible") {
+        return new Set(store);
+    } else {
+        return new Set(universe.filter(v => !store.has(v)));
+    }
+}
+
 
 // Load puzzles on page load
 loadPuzzles();

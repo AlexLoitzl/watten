@@ -518,6 +518,18 @@ h1 {
     display: block;
 }
 
+.submit-button.flash-correct {
+    background-color: #4caf50 !important;
+}
+
+.submit-button.flash-wrong {
+    background-color: #f44336 !important;
+}
+
+.submit-button {
+    transition: background-color 0.75s ease;
+}
+
 .explanation {
     margin-top: 1rem;
     font-size: 1rem;
