@@ -7,7 +7,7 @@ let completedPuzzles = new Set();
 let selectedSuits = new Set();
 let selectedRanks = new Set();
 
-const KNOWLEDGE_SUITS = ["Herz", "Schellen", "Eichel", "Laub"];
+const KNOWLEDGE_SUITS = ["Herz", "Schell", "Eichel", "Laub"];
 const KNOWLEDGE_RANKS = ["Ass", "König", "Ober", "Unter", "10", "9", "8", "7"];
 const suitModeRef = { current: null };
 const rankModeRef = { current: null };
@@ -18,7 +18,7 @@ function getCardImagePath(suit, rank) {
     // You can customize this based on your image naming convention
     const suitMap = {
         'Herz': 'h',
-        'Schellen': 's',
+        'Schell': 's',
         'Eichel': 'e',
         'Laub': 'l'
     };

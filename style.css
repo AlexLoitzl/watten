@@ -279,12 +279,6 @@ h1 {
     background: var(--gold);
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
 }
 
 .game-card {
