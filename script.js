@@ -358,22 +358,17 @@ function checkAnswer() {
     }
 
     if (isCorrect) {
-        feedback.className = 'feedback correct';
-        feedback.innerHTML = `
-            <div>✓ Richtig!</div>
-            <div class="explanation">${puzzle.explanation}</div>
-        `;
+        const explanationBox = document.getElementById("explanationBox");
+        if (explanationBox && puzzle.explanation) {
+            explanationBox.textContent = puzzle.explanation;
+            explanationBox.classList.remove("correct", "wrong");
+            explanationBox.classList.add("visible", isCorrect ? "correct" : "wrong");
+        }
 
         // Mark as completed
         completedPuzzles.add(puzzle.id);
         saveProgress();
         renderPuzzleList();
-    } else {
-        feedback.className = 'feedback incorrect';
-        feedback.innerHTML = `
-            <div>✗ Leider falsch</div>
-            <div class="explanation">${puzzle.explanation}</div>
-        `;
     }
     flashSubmitButton(isCorrect);
 
