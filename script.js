@@ -164,7 +164,9 @@ function renderTrick(trick, container, starterPosition) {
 
         if (card) {
             const isRed = card.suit === 'Herz' || card.suit === 'Schellen';
-            cardEl.className = `game-card ${isRed ? 'red' : ''}`;
+            const puzzle = allPuzzles[currentPuzzleIndex];
+            const isWinner = puzzle.winner !== undefined && puzzle.winner === index;
+            cardEl.className = `game-card ${isRed ? 'red' : ''} ${isWinner ? 'winner' : ''}`;
 
             // Try to load image
             const imgPath = getCardImagePath(card.suit, card.rank);

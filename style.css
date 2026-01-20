@@ -328,6 +328,21 @@ h1 {
     font-size: 3rem;
 }
 
+.game-card.winner::after {
+    content: '♔';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+.game-card.winner {
+    border: 5px solid var(--gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
 /* Previous trick (smaller) */
 .previous-trick-section {
     margin-bottom: 2rem;

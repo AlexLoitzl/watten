@@ -1,32 +1,51 @@
 {
   "puzzles": [
     {
-      "id": 1,
-      "date": "2026-1-20",
-      "previousTrick": [
-          { "suit": "Laub", "rank": "8" },
-          { "suit": "Laub", "rank": "9" },
-          { "suit": "Schell", "rank": "Unter" },
-          { "suit": "Eichel", "rank": "10" }
-      ],
-      "previousTrickStarter": 3,
-      "trick": [
-        null,
-        null,
-        { "suit": "Eichel", "rank": "Ober" },
-        { "suit": "Eichel", "rank": "König" }
-      ],
-      "trickStarter": 2,
-      "hand": [
-        { "suit": "Eichel", "rank": "Unter" },
+        "id": 1,
+        "date": "2026-01-20",
+        "previousTrick": [
+            { "suit": "Laub", "rank": "8" },
+            { "suit": "Laub", "rank": "9" },
+            { "suit": "Schell", "rank": "Unter" },
+            { "suit": "Eichel", "rank": "10" }
+        ],
+        "previousTrickStarter": 3,
+        "trick": [
+            null,
+            null,
+            { "suit": "Eichel", "rank": "Ober" },
+            { "suit": "Eichel", "rank": "König" }
+        ],
+        "trickStarter": 2,
+        "hand": [
+            { "suit": "Eichel", "rank": "Unter" },
+            { "suit": "Schell", "rank": "König" },
+            { "suit": "Laub", "rank": "10" },
+            { "suit": "Eichel", "rank": "8" }
+        ],
+        "question": "Welche Karte solltest du spielen?",
+        "type": "card",
+        "correctAnswer": { "suit": "Schell", "rank": "König" },
+            "explanation": "Eichel ist nichts, und wir müssen stechen. Aus dem ersten Stich ergibt sich, dass es sehr wahrscheinlich Schell ist, da der Partner Trumpf angesagt hat"
+    },
+    {
+        "id": 2,
+        "date": "2026-01-21",
+        "question": "Was weißt du?",
+        "type": "knowledge",
+        "trick": [
+        { "suit": "Schell", "rank": "Unter" },
         { "suit": "Schell", "rank": "König" },
         { "suit": "Laub", "rank": "10" },
-        { "suit": "Eichel", "rank": "8" }
-      ],
-      "question": "Welche Karte solltest du spielen?",
-      "type": "card",
-      "correctAnswer": { "suit": "Schell", "rank": "König" },
-        "explanation": "Eichel ist nichts, und wir müssen stechen. Aus dem ersten Stich ergibt sich, dass es sehr wahrscheinlich Schell ist, da der Partner Trumpf angesagt hat"
+        { "suit": "Herz", "rank": "10" }
+        ],
+        "trickStarter": 3,
+        "correct": {
+            "suits": ["Schell", "Eichel"],
+            "ranks": ["Unter"]
+        },
+        "winner": 0,
+        "explanation": "Es kann nicht Herz oder Laub sein, da dein Partner sonst anders spielen würde. Es ist nicht der Gute, da dein Partner eine Zehn spielt. Es muss Schlag sein, da sonst der König sticht"
     }
   ]
 }
